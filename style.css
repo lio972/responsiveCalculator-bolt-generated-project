@@ -30,6 +30,21 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
 
+  .history {
+    padding: 16px 20px;
+    min-height: 40px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.2rem;
+    text-align: right;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 120px;
+    overflow-y: auto;
+  }
+
+  .history div {
+    margin-bottom: 4px;
+  }
+
   .display {
     padding: 20px;
     text-align: right;
@@ -91,6 +106,10 @@
   @media (max-width: 400px) {
     .output {
       font-size: 2rem;
+    }
+    
+    .history {
+      font-size: 1rem;
     }
     
     button {

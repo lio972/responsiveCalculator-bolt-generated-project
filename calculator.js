@@ -4,7 +4,9 @@ class Calculator {
       this.previousInput = '';
       this.operator = null;
       this.shouldReset = false;
+      this.history = [];
       this.output = document.getElementById('output');
+      this.historyDisplay = document.getElementById('history');
       this.init();
     }
 
@@ -86,16 +88,38 @@ class Calculator {
           return;
       }
 
+      const operationSymbol = {
+        add: '+',
+        subtract: '-',
+        multiply: '×',
+        divide: '÷'
+      }[this.operator];
+
+      const historyEntry = `${this.previousInput} ${operationSymbol} ${this.currentInput} = ${computation}`;
+      this.history.unshift(historyEntry);
+      if (this.history.length > 5) {
+        this.history.pop();
+      }
+      this.updateHistory();
+
       this.currentInput = computation.toString();
       this.operator = null;
       this.previousInput = '';
       this.shouldReset = true;
     }
 
+    updateHistory() {
+      this.historyDisplay.innerHTML = this.history
+        .map(entry => `<div>${entry}</div>`)
+        .join('');
+    }
+
     clear() {
       this.currentInput = '0';
       this.previousInput = '';
       this.operator = null;
+      this.history = [];
+      this.updateHistory();
     }
 
     backspace() {
